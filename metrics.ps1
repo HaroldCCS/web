@@ -1,7 +1,7 @@
 # Configuración
 $url = "https://windows-metrics-389205780371.us-east1.run.app/metrics"
 $tempPath = "$env:TEMP\screenshot.png"
-$intervaloSegundos = 60 # 1 minuto
+$intervaloSegundos = 25 # 1 minuto
 
 # Asegurar la carga de la librería para gráficos
 Add-Type -AssemblyName System.Windows.Forms
